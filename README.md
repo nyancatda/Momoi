@@ -11,10 +11,12 @@
     获取代理列表
 -test_proxy
     测试列表内的代理
+-url string
+    需要请求的URL
+-cookies string
+    需要携带的Cookie
 -pool int
     线程池内线程数量 (default 50)
--url string
-    需要攻击的URL
 ```
 
 ## 🎬 发起请求

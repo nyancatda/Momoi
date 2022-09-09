@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 21:56:24
- * @LastEditTime: 2022-09-09 23:43:58
+ * @LastEditTime: 2022-09-10 01:58:57
  * @LastEditors: NyanCatda
  * @Description: 主文件
  * @FilePath: \Momoi\main.go
@@ -19,7 +19,8 @@ func main() {
 	// 获取参数
 	GetProxy := flag.Bool("get_proxy", false, "获取代理列表")
 	TestProxy := flag.Bool("test_proxy", false, "测试列表内的代理")
-	URL := flag.String("url", "", "需要攻击的URL")
+	URL := flag.String("url", "", "需要请求的URL")
+	Cookies := flag.String("cookies", "", "需要携带的Cookie")
 	Pool := flag.Int("pool", 50, "线程池内线程数量")
 	flag.Parse()
 
@@ -50,7 +51,7 @@ func main() {
 
 	if *URL != "" {
 		// 攻击
-		AttackStart(*URL, *Pool)
+		AttackStart(*URL, *Cookies, *Pool)
 	}
 
 	AyaLog.Info("System", "请输入-help查看帮助")
