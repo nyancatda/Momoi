@@ -1,12 +1,12 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 21:57:59
- * @LastEditTime: 2022-09-09 22:14:56
+ * @LastEditTime: 2022-09-09 23:49:42
  * @LastEditors: NyanCatda
  * @Description: 获取Socket5代理列表
- * @FilePath: \Momoi\Socket5\GetProxy.go
+ * @FilePath: \Momoi\Socket5Proxy\GetProxy.go
  */
-package Socket5
+package Socket5Proxy
 
 import (
 	"net/http"
@@ -35,8 +35,12 @@ func GetProxy() []string {
 	// 循环获取可用的代理列表
 	for _, Value := range proxyList {
 		Body, HttpResponse, err := HttpRequest.GetRequest(Value, []string{})
-		if HttpResponse.StatusCode != http.StatusOK || err != nil {
-			AyaLog.Warning("Socket5", Value+" 代理列表获取失败")
+		if err != nil {
+			AyaLog.Warning("Socket5", Value+" 的代理列表获取失败")
+			continue
+		}
+		if HttpResponse.StatusCode != http.StatusOK {
+			AyaLog.Warning("Socket5", Value+" 的代理列表获取失败")
 			continue
 		}
 		BodyStr := string(Body)

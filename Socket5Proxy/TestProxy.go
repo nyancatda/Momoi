@@ -1,12 +1,12 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 22:18:06
- * @LastEditTime: 2022-09-09 22:55:20
+ * @LastEditTime: 2022-09-09 23:15:57
  * @LastEditors: NyanCatda
  * @Description: 检查代理是否可用
- * @FilePath: \Momoi\Socket5\TestProxy.go
+ * @FilePath: \Momoi\Socket5Proxy\TestProxy.go
  */
-package Socket5
+package Socket5Proxy
 
 import (
 	"io/ioutil"
