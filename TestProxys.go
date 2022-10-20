@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 23:22:45
- * @LastEditTime: 2022-09-09 23:44:26
+ * @LastEditTime: 2022-10-20 19:53:14
  * @LastEditors: NyanCatda
  * @Description: 测试代理文件列表内的代理
  * @FilePath: \Momoi\TestProxys.go
@@ -13,7 +13,7 @@ import (
 	"os"
 
 	"github.com/nyancatda/AyaLog"
-	"github.com/nyancatda/Momoi/Socket5Proxy"
+	"github.com/nyancatda/Momoi/Socks5Proxy"
 	"github.com/nyancatda/Momoi/Tools/File"
 )
 
@@ -35,7 +35,7 @@ func TestProxys() error {
 	}
 
 	// 测试代理列表内的代理
-	OKProxysList := Socket5Proxy.TestAll(ProxysList)
+	OKProxysList := Socks5Proxy.TestAll(ProxysList)
 
 	AyaLog.Info("System", "测试完成，共", len(ProxysList), "个代理，", len(OKProxysList), "个可用")
 

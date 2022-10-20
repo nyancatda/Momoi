@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 23:19:05
- * @LastEditTime: 2022-09-09 23:23:11
+ * @LastEditTime: 2022-10-20 19:52:52
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \Momoi\WriteProxys.go
@@ -13,7 +13,7 @@ import (
 	"os"
 
 	"github.com/nyancatda/AyaLog"
-	"github.com/nyancatda/Momoi/Socket5Proxy"
+	"github.com/nyancatda/Momoi/Socks5Proxy"
 	"github.com/nyancatda/Momoi/Tools/File"
 )
 
@@ -25,7 +25,7 @@ var ProxysFileName string = "Proxys.json"
  */
 func WriteProxys() error {
 	// 获取代理转换为json写入文件
-	ProxyList := Socket5Proxy.GetProxy()
+	ProxyList := Socks5Proxy.GetProxy()
 
 	if len(ProxyList) == 0 {
 		AyaLog.Print("System", AyaLog.ERROR, "获取代理失败")

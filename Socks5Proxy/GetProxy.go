@@ -1,12 +1,12 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-09-09 21:57:59
- * @LastEditTime: 2022-09-09 23:49:42
+ * @LastEditTime: 2022-10-20 19:51:27
  * @LastEditors: NyanCatda
  * @Description: 获取Socket5代理列表
- * @FilePath: \Momoi\Socket5Proxy\GetProxy.go
+ * @FilePath: \Momoi\Socks5Proxy\GetProxy.go
  */
-package Socket5Proxy
+package Socks5Proxy
 
 import (
 	"net/http"
