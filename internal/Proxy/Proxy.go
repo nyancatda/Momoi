@@ -15,4 +15,5 @@ type Proxy interface {
 	Download() ([]string, error)
 	GetProxys() ([]proxy.Dialer, error)
 	Test(ProxyURL string) (bool, error)
+	Save(Proxys []string) error
 }

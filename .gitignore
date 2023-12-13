@@ -16,5 +16,6 @@
 # vendor/
 
 /build
+/proxys
 
 config.json
