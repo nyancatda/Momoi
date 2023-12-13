@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2023-12-13 14:09:00
- * @LastEditTime: 2023-12-13 15:01:49
+ * @LastEditTime: 2023-12-13 15:47:09
  * @LastEditors: NyanCatda
  * @Description: 通过TCP协议发起HTTP通信
  * @FilePath: \Momoi\internal\TCP\HTTP.go
@@ -13,10 +13,13 @@ import (
 	"fmt"
 	"net"
 	"strings"
+
+	"golang.org/x/net/proxy"
 )
 
 /**
  * @description: 通过TCP协议发起HTTP通信，不接收返回
+ * @param {proxy.Dialer} proxyDialer 代理拨号器
  * @param {bool} SSL 是否使用SSL
  * @param {string} Method 请求方法 GET/POST/PUT/DELETE......
  * @param {string} Host 主机地址
@@ -26,11 +29,26 @@ import (
  * @param {string} Body 请求体
  * @return {error} 错误信息
  */
-func HTTPRequest(SSL bool, Method string, Host string, Port int, Path string, Header map[string]string, Body string) error {
-	// 建立TCP连接
-	Conn, err := net.Dial("tcp", Host+":"+fmt.Sprint(Port))
-	if err != nil {
-		return err
+func HTTPRequest(ProxyDialer proxy.Dialer, SSL bool, Method string, Host string, Port int, Path string, Header map[string]string, Body string) error {
+	var Conn net.Conn
+	Addr := Host + ":" + fmt.Sprint(Port)
+
+	if ProxyDialer != nil {
+		// 通过代理发起连接
+		ProxyConn, err := ProxyDialer.Dial("tcp", Addr)
+		if err != nil {
+			return err
+		}
+
+		Conn = ProxyConn
+	} else {
+		// 建立TCP连接
+		TCPConn, err := net.Dial("tcp", Host+":"+fmt.Sprint(Port))
+		if err != nil {
+			return err
+		}
+
+		Conn = TCPConn
 	}
 	defer Conn.Close()
 
