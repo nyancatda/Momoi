@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2023-12-13 15:58:05
- * @LastEditTime: 2023-12-13 16:09:58
+ * @LastEditTime: 2023-12-13 16:01:25
  * @LastEditors: NyanCatda
  * @Description: 配置文件封装
  * @FilePath: \Momoi\internal\Config\Config.go
@@ -13,8 +13,16 @@ import (
 	"os"
 )
 
-type Config struct {
+type ConfigProxy struct {
+	ProxyFileURL []string `json:"proxy_file_url"` // 代理文件URL
+	AutoTest     bool     `json:"auto_test"`      // 自动测试代理
+	AutoTestPool int      `json:"auto_test_pool"` // 自动测试代理线程数量
+}
 
+type Config struct {
+	Proxy struct {
+		Socks5 ConfigProxy `json:"socks5"`
+	} `json:"proxy"`
 }
 
 var (
