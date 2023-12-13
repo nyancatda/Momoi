@@ -27,8 +27,8 @@ func GetProxy() {
 	// 测试代理
 	if Config.Get.Proxy.Socks5.AutoTest {
 		var ProxyOKList []string
+		WG := Pool.NewPool(Config.Get.Proxy.Socks5.AutoTestPool)
 		for _, ProxyURL := range ProxyList {
-			WG := Pool.NewPool(Config.Get.Proxy.Socks5.AutoTestPool)
 			go func(ProxyURL string) {
 				WG.Add(1)
 
@@ -46,8 +46,8 @@ func GetProxy() {
 				Log.Print.Print("System", AyaLog.ERROR, "Proxy "+ProxyURL+" is unavailable")
 				WG.Done()
 			}(ProxyURL)
-			WG.Wait()
 		}
+		WG.Wait()
 
 		ProxyList = ProxyOKList
 	}
